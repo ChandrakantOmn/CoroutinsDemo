@@ -30,7 +30,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import java.util.concurrent.TimeUnit.SECONDS
 
 @RunWith(JUnit4::class)
 class MainViewModelTest {
@@ -102,7 +101,7 @@ class MainViewModelTest {
                 )
         )
 
-        subject.snackbar.captureValues {
+        subject.snackBar.captureValues {
             subject.onMainViewClicked()
             runBlocking {
                 call.onError(FakeNetworkException("An error"))

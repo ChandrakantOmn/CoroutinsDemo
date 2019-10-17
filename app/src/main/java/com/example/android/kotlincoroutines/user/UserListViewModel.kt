@@ -1,20 +1,4 @@
-/*
- * Copyright 2018 Google LLC
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     https://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-package com.example.android.kotlincoroutines.main
+package com.example.android.kotlincoroutines.user
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -24,10 +8,9 @@ import com.example.android.kotlincoroutines.util.singleArgViewModelFactory
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val repository: TitleRepository) : ViewModel() {
-
+class UserListViewModel(private val repository: UserRepository) : ViewModel() {
     companion object {
-        val FACTORY = singleArgViewModelFactory(::MainViewModel)
+        val FACTORY = singleArgViewModelFactory(::UserListViewModel)
     }
 
     private val _snackBar = MutableLiveData<String>()
@@ -43,16 +26,16 @@ class MainViewModel(private val repository: TitleRepository) : ViewModel() {
         get() = _spinner
 
     fun onMainViewClicked() {
-        refreshTitle()
+        getUsers()
     }
 
     fun onSnackbarShown() {
         _snackBar.value = null
     }
 
-    private fun refreshTitle() {
+    private fun getUsers() {
         launchDataLoad {
-            repository.refreshTitle()
+            repository.getUsers(1, 100)
         }
     }
 
@@ -68,4 +51,7 @@ class MainViewModel(private val repository: TitleRepository) : ViewModel() {
             }
         }
     }
+
 }
+
+
