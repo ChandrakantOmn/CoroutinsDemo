@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity() {
         rootLayout.setOnClickListener {
             viewModel.onMainViewClicked()
         }
-
         // Show a snackbar whenever the [ViewModel.snackbar] is updated with a non-null value
         viewModel.snackbar.observe(this, Observer { text ->
             text?.let {
